@@ -1,0 +1,8 @@
+{
+  "name": "xsky-work-report",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/xsky-work-report",
+  "projectType": "application",
+  "targets": {},
+  "tags": []
+}
