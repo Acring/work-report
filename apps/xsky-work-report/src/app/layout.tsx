@@ -1,4 +1,5 @@
 import './global.css';
+import '../style/tailwind.css';
 
 export const metadata = {
   title: 'Welcome to xsky-work-report',
