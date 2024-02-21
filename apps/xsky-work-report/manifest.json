@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "xsky-work-report",
+  "version": "1.0.0",
+  "description": "xsky-work-report",
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "64": "icon.png",
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://xskydata.feishu.cn/share/base/form/shrcnR7Vw5cojv93EWdWrp3art8*"
+      ],
+      "css": ["dist/assets/index.css"],
+      "js": ["dist/content.js"]
+    }
+  ],
+  "permissions": ["webRequest"],
+  "host_permissions": ["http://timor.tech/api/holiday/batch"],
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "matches": ["https://xskydata.feishu.cn/*"],
+      "resources": ["dist/index.js"]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "xsky-work-report-website",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/xsky-work-report-website",
+  "projectType": "application",
+  "implicitDependencies": ["xsky-work-report"],
+  "targets": {
+    "gen-zip": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["^build"],
+      "options": {
+        "command": "node apps/xsky-work-report-website/scripts/gen-extension.js"
+      }
+    }
+  },
+  "tags": []
+}
