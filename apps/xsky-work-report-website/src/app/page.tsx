@@ -31,6 +31,7 @@ export default function Index() {
       after:blur-lg mt-6 text cursor-pointer rounded-full justify-center backdrop-blur-none"
           href="/work-report-v1.0.2.zip"
           onClick={() => {
+            fetch('/api/download', { method: 'GET' });
             confetti({
               particleCount: 100,
               spread: 70,
