@@ -72,7 +72,7 @@ function App() {
     Record<string, FormValueWithInfo>
   >({});
   const [keyValueCSV, setKeyValueCSV] = useState<string>('');
-  const [keyValues, setKeyValues] = useState<KeyValue[]>([]);
+  const [keyValues, setKeyValues] = useState<KeyValue[] | null>([]);
   const [result, setResult] = useState<{ index: number; status: string }[]>([]);
   const [submitting, setSubmitting] = useState(false);
 
@@ -93,6 +93,7 @@ function App() {
       (err, output) => {
         if (err) {
           console.log(err);
+          setKeyValues(null);
         }
         setKeyValues(output);
       },
@@ -201,6 +202,7 @@ function App() {
   }, [handleGetFormValues]);
 
   const handleConfirm = useCallback(() => {
+    if (keyValues === null) return;
     const csrfToken = / _csrf_token=(.*?);/.exec(document.cookie)?.[1];
     if (submitting) {
       return;
@@ -441,6 +443,19 @@ function App() {
                   placeholder="请选择上方的时间范围，自动过滤掉节假日，周末"
                   onChange={(e) => setKeyValueCSV(e.target.value)}
                 ></Textarea>
+                <div>
+                  {keyValues ? (
+                    <div>
+                      共 {keyValues.length} 个工作日，工时总数:
+                      {keyValues?.reduce((acc, cur) => {
+                        return acc + Number(cur.duration);
+                      }, 0)}{' '}
+                      个小时
+                    </div>
+                  ) : (
+                    <div className="text-red-500">csv 解析失败</div>
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -448,7 +463,7 @@ function App() {
             {result.map((item) => {
               return (
                 <div key={item.index}>
-                  {`${keyValues[item.index].date}`}: {item.status}
+                  {`${keyValues?.[item.index].date}`}: {item.status}
                 </div>
               );
             })}
@@ -458,13 +473,15 @@ function App() {
               )}
           </div>
           <DialogFooter>
-            <Button
-              type="button"
-              onClick={handleConfirm}
-              disabled={hasEmpty || submitting}
-            >
-              {submitting ? '提交中...' : '提交'}
-            </Button>
+            {result.length < 1 && (
+              <Button
+                type="button"
+                onClick={handleConfirm}
+                disabled={hasEmpty || submitting}
+              >
+                提交
+              </Button>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>
