@@ -31,7 +31,7 @@ export default function Index() {
       before:rounded-full before:blur-lg  after:absolute after:z-10 after:w-20 
       after:h-20 after:content['']  after:bg-rose-300 after:right-8 after:top-3 after:rounded-full 
       after:blur-lg mt-6 text cursor-pointer rounded-full justify-center backdrop-blur-none"
-          href="/work-report-v1.0.2.zip"
+          href={`/work-report-v${process.env.NEXT_PUBLIC_EXTENSION_VERSION}.zip`}
           onClick={() => {
             fetch('/api/download', { method: 'GET' });
             confetti({
