@@ -188,10 +188,7 @@ function App() {
         {} as Record<string, FormValueWithInfo>,
       );
 
-      return {
-        ...prev,
-        ...newValues,
-      };
+      return newValues;
     });
   }, [formFieldMap, formHandler]);
 
@@ -469,7 +466,9 @@ function App() {
             })}
             {!!result.length &&
               result.every((item) => item.status.includes('✅')) && (
-                <div className="mt-2 text-xl font-bold">🎉 工时填写完毕 </div>
+                <div className="mt-2 text-xl font-bold">
+                  🎉 工时填写完毕，请在「研发工时统计」表格进行确认
+                </div>
               )}
           </div>
           <DialogFooter>
