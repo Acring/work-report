@@ -83,3 +83,23 @@ https://github.xsky.com/storage/user/377/files/0d4d6c78-847a-42a2-8d15-9b676dad1
 ## 节假日 API
 
 免费节假日 API: https://timor.tech/api/holiday
+
+
+## 开发
+
+1. 持续 build 插件 `nx build xsky-work-report --watch`
+2. 在浏览器中添加插件为开发路径比如 `/Users/acring/Workspace/xsky-work-report/apps/xsky-work-report`
+
+## 发布
+
+1. 在 website 目录中生成压缩包 `nx gen-zip xsky-work-report-website`
+2. 修改 .env 中的压缩包版本号 `NEXT_PUBLIC_EXTENSION_VERSION=新的版本号`
+
+## 部署
+
+暂时没有自动部署脚本
+
+1. 进入对应服务器
+2. 拉取项目代码
+3. yarn 安装依赖
+4. pm2 启动项目 `pm2 start "npx nx start xsky-work-report-website --port 3001" --name work-report-website`
