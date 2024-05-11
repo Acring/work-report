@@ -359,7 +359,12 @@ function App() {
           }
         }}
       >
-        <DialogContent className="text-black sm:max-w-[780px]">
+        <DialogContent
+          className="text-black sm:max-w-[780px]"
+          onPointerDownOutside={(e) => {
+            e.preventDefault();
+          }}
+        >
           <DialogHeader>
             <DialogTitle>快速填写表单</DialogTitle>
             <DialogDescription>
